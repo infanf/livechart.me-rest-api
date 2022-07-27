@@ -5,6 +5,9 @@ Here you can find the list of endpoints that the livechart.me api has. This is t
 ![lol](https://user-images.githubusercontent.com/103996576/181138198-fb200425-50e8-425c-8178-51da98a9cacc.png)
 
 
--   [Log in](api/AUTHENTICATE.md)
--   [Nearest](api/NEAREST.md)
--   [Season Chart](api/SEASON_CHART.md)
+### Endpoints:
+
+-   [authentification](api/AUTHENTICATE.md)
+-   [day_chart](api/DAY_CHART.md)
+-   [nearest](api/NEAREST.md)
+-   [season_chart](api/SEASON_CHART.md)
