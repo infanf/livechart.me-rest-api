@@ -13,3 +13,4 @@ Here you can find the list of endpoints that the livechart.me api has. This is t
 -   [nearest](api/NEAREST.md)
 -   [search](api/SEARCH.md)
 -   [season_chart](api/SEASON_CHART.md)
+-   [user_profile](api/USER_PROFILE.md)
