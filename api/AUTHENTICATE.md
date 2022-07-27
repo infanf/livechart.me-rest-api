@@ -15,7 +15,6 @@ ___
 ```http
 accept-encoding: gzip
 connection: Keep-Alive
-content-length: 47
 content-type: application/x-www-form-urlencoded
 host: www.livechart.me
 user-agent: me.livechart.android/6.4.8
