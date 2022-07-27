@@ -6,3 +6,4 @@ Here you can find the list of endpoints that the livechart.me api has. This is t
 
 
 -   [Log in](api/AUTHENTICATE.md)
+-   [nearest](api/NEAREST.md)
