@@ -10,4 +10,5 @@ Here you can find the list of endpoints that the livechart.me api has. This is t
 -   [authentification](api/AUTHENTICATE.md)
 -   [day_chart](api/SCHEDULE.md)
 -   [nearest](api/NEAREST.md)
+-   [search](api/SEARCH.md)
 -   [season_chart](api/SEASON_CHART.md)
