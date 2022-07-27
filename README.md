@@ -8,6 +8,7 @@ Here you can find the list of endpoints that the livechart.me api has. This is t
 ### Endpoints:
 
 -   [authentification](api/AUTHENTICATE.md)
+-   [headlines](api/HEADLINES.md)
 -   [day_chart](api/SCHEDULE.md)
 -   [nearest](api/NEAREST.md)
 -   [search](api/SEARCH.md)
