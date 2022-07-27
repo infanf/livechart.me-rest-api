@@ -27,3 +27,10 @@ ___
 | email | test@livechart.me |
 |---|---|
 | password | test |
+
+
+___
+
+## Short note:
+
+Once connected, and you have retrieved the access_token, it is possible to pass it in the header for EVERY request, this will not cause any problems for the API, even for requests where connection is not required
