@@ -1,4 +1,4 @@
-# livechart.me-api
+#  livechart.me-rest-api
 
 Here you can find the list of endpoints that the livechart.me api has. This is the official API.
 
