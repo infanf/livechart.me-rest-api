@@ -6,8 +6,14 @@
 ___
 
 #### ENDPOINT:
-` https://www.livechart.me/api/v1/charts/nearest?fields[]=previous_chart&fields[]=next_chart `
+` https://www.livechart.me/api/v1/charts/nearest `
 
+___
+
+#### POTENTIAL ARGUMENTS:
+```http
+fields[]: previous_chart | next_chart (both can be used in same time)
+```
 ___
 
 #### HEADERS:
