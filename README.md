@@ -7,6 +7,7 @@ Here you can find the list of endpoints that the livechart.me rest api has. This
 
 ### Endpoints:
 
+-   [anime](api/ANIME.md)
 -   [authentification](api/AUTHENTICATE.md)
 -   [headlines](api/HEADLINES.md)
 -   [refresh_token](api/REFRESH_TOKEN.md)
