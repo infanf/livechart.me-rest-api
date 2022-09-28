@@ -18,3 +18,4 @@ Here you can find the list of endpoints that the livechart.me rest api has. This
 -   [season_chart](api/SEASON_CHART.md)
 -   [streams](api/STREAMS.md)
 -   [user_profile](api/USER_PROFILE.md)
+-   [videos](api/VIDEOS.md)
