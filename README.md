@@ -13,6 +13,7 @@ Here you can find the list of endpoints that the livechart.me rest api has. This
 -   [refresh_token](api/REFRESH_TOKEN.md)
 -   [schedule](api/SCHEDULE.md)
 -   [nearest](api/NEAREST.md)
+-   [next_episode](api/NEXT_EPISODE.md)
 -   [search](api/SEARCH.md)
 -   [season_chart](api/SEASON_CHART.md)
 -   [streams](api/STREAMS.md)
