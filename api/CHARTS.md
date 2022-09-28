@@ -6,16 +6,10 @@
 ___
 
 #### ENDPOINT:
-` https://www.livechart.me/api/v1/charts/nearest `
+` https://www.livechart.me/api/v1/charts `
 
 ___
 
-#### POTENTIAL ARGUMENTS:
-```http
-fields[]: previous_chart | next_chart (both can be used in same time),
-season: winter | spring | summer | fall
-```
-___
 
 #### HEADERS:
 
@@ -24,4 +18,12 @@ accept-encoding: gzip
 connection: Keep-Alive
 host: www.livechart.me
 user-agent: me.livechart.android/6.4.8
+```
+
+___
+
+POTENTIAL ROUTE ADDITION
+
+```http
+https://www.livechart.me/api/v1/charts/[slug]/full_instances
 ```
