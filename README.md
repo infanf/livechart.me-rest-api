@@ -6,16 +6,22 @@ Here you can find the list of endpoints that the livechart.me rest api has. This
 
 
 ### Endpoints:
-
--   [anime](api/ANIME.md)
 -   [authentification](api/AUTHENTICATE.md)
--   [headlines](api/HEADLINES.md)
 -   [refresh_token](api/REFRESH_TOKEN.md)
--   [schedule](api/SCHEDULE.md)
--   [nearest](api/NEAREST.md)
--   [next_episode](api/NEXT_EPISODE.md)
+> 
 -   [search](api/SEARCH.md)
--   [season_chart](api/SEASON_CHART.md)
+-   [anime](api/ANIME.md)
+-   [next_episode](api/NEXT_EPISODE.md)
 -   [streams](api/STREAMS.md)
--   [user_profile](api/USER_PROFILE.md)
 -   [videos](api/VIDEOS.md)
+-   [tags](api/TAGS.md)
+> 
+-   [studios](api/STUDIOS.md)
+-   [headlines](api/HEADLINES.md)
+-   [schedule](api/SCHEDULE.md)
+> 
+-   [nearest](api/NEAREST.md)
+-   [season_chart](api/SEASON_CHART.md)
+> 
+-   [user_profile](api/USER_PROFILE.md)
+-   [user](api/USER.md)
