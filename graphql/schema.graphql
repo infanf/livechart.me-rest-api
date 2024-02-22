@@ -1,0 +1,49 @@
+
+
+type Query {
+  singleAnime(
+    id: ID!
+  ): Anime!
+}
+
+type Anime {
+    id: String
+    romajiTitle: String
+    englishTitle: String
+    nativeTitle: String
+    description: String
+    startDate: DateTimeWithPrecision
+    endDate: String
+    nextEpisode: ShallowEpisode
+}
+
+type DateTimeWithPrecision {
+	value: ISO8601DateTime
+	precision: DateTimePrecision
+}
+
+type ShallowEpisode {
+    id: String
+    number: Int
+    label: String
+    airdate: ISO8601DateTime
+}
+
+enum DateTimePrecision {
+    DATE_AND_TIME
+    DATE
+}
+
+enum TitleLanguage {
+    ROMAJI
+    NATIVE
+    ENGLISH
+}
+
+type Viewer {
+    username: String!
+}
+
+scalar ISO8601Date
+scalar ISO8601DateTime
+scalar TimeZoneName
