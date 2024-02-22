@@ -10,8 +10,14 @@ ___
 
 ___
 
-#### HEADERS:
+#### REQUIRED ARGUMENTS:
+```http
+refresh_token: {refresh_token}
+```
 
+___
+
+#### HEADERS:
 ```http
 accept-encoding: gzip
 connection: Keep-Alive
@@ -19,11 +25,4 @@ content-type: application/x-www-form-urlencoded
 host: www.livechart.me
 user-agent: me.livechart.android/6.4.8
 ```
-
-___
-
-#### REQUEST BODY:
-
-| refresh_token | {refresh_token} |
-|---|---|
-| old_access_token | {old_access_token} |
+> This endpoint accepts both content-type json or urlencoded

@@ -10,8 +10,14 @@ ___
 
 ___
 
-#### HEADERS:
+#### REQUIRED ARGUMENTS:
+| email    | test@livechart.me |
+| -------- | ----------------- |
+| password | test              |
 
+___
+
+#### HEADERS:
 ```http
 accept-encoding: gzip
 connection: Keep-Alive
@@ -19,18 +25,18 @@ content-type: application/x-www-form-urlencoded
 host: www.livechart.me
 user-agent: me.livechart.android/6.4.8
 ```
-
-___
-
-#### REQUEST BODY:
-
-| email | test@livechart.me |
-|---|---|
-| password | test |
-
+> This endpoint accepts both content-type json or urlencoded
 
 ___
 
 ## Short note:
-
 Once connected, and you have retrieved the access_token, it is possible to pass it in the header for EVERY request, this will not cause any problems for the API, even for requests where connection is not required
+
+___
+
+### Valid auth headers
+```http
+x-auth-token: {access_token}
+authorization: {access_token}
+authorization: {token_type} {access_token}
+```

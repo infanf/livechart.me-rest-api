@@ -15,6 +15,7 @@ ___
 fields[]: next_episode,
 category: tv | movies | ovas | all,
 offset: 0,
+limit: 0,
 sort: title | airdate | popularity | modified | countdown | anime.avg_rating,
 titles: romaji | english,
 leftovers: true | false,
@@ -24,9 +25,9 @@ hide_skipping: true | false
 ___
 
 #### HEADERS:
-
 ```http
 accept-encoding: gzip
 connection: Keep-Alive
 host: www.livechart.me
 user-agent: me.livechart.android/6.4.8
+```

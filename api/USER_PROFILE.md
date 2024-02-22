@@ -7,15 +7,15 @@ ___
 
 #### ENDPOINT:
 ` https://www.livechart.me/api/v1/me `
+> Requires [authorization](AUTHENTICATE.md)
 
 ___
 
 #### HEADERS:
-
 ```http
 accept-encoding: gzip
 connection: Keep-Alive
 host: www.livechart.me
 user-agent: me.livechart.android/6.4.8
-x-auth-token: {access_token}
+authorization: {access_token}
 ```

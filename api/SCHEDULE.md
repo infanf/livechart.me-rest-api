@@ -15,6 +15,7 @@ ___
 start_date: {exemple: 2022-07-26},
 end_date: {exemple: 2022-07-27},
 offset: 0,
+limit: 0,
 sort: title | airdate | popularity | modified | countdown | anime.avg_rating,
 titles: romaji | english,
 hide_skipping: true | false
@@ -23,9 +24,9 @@ hide_skipping: true | false
 ___
 
 #### HEADERS:
-
 ```http
 accept-encoding: gzip
 connection: Keep-Alive
 host: www.livechart.me
 user-agent: me.livechart.android/6.4.8
+```
