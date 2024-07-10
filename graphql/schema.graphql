@@ -1,56 +1,102 @@
+# Auth requires cookie & csrf token
+#TODO: pagnation definitions (see https://relay.dev/docs/guides/graphql-server-specification/)
+
 schema {
     query: Query
     mutation: Mutation
 }
 
 type Query {
-    singleAnime(
-        id: ID!
-    ): Anime
+    singleAnime(id: ID!): Anime
+    franchise(id: ID!): Franchise
 
-    anime(
-        term: String!
-    ): AnimeConnection
+    anime(term: String!): AnimeConnection
+    schedule(date: ISO8601Date!): ScheduleListings
 
-    viewer: Viewer
+    user(username: String!): PublicUser
+
+    viewer: Viewer # Authed
+    notificationCategories: NotificationCategory # Authed
 }
 
-type Mutation {
+type Mutation { # Authed (obv)
     upsertLibraryEntry(
         animeId: ID!
         attributes: LibraryEntryAttributes!
         ratingScale: RatingScale
     ): Boolean
+
+    # franchise
+    unfavorite(id: ID!): RemoveFavoriteResult #TODO
+    favorite(id: ID!): AddFavoriteResult #TODO
 }
 
+#
+# --- Anime +related ---
 type AnimeConnection {
-  nodes: [Anime]
+    nodes: [Anime]
 }
-
 type Anime {
     id: String
     databaseId: ID
+
     romajiTitle: String
     englishTitle: String
     nativeTitle: String
     alternativeTitles: [String]
+
     poster: OnTheFlyImage
     synopsis: AnimeSynopsis
-    startDate: DateTimeWithPrecision
     aggregateRating: AggregateRating
     tags: [ShallowTag]
+    studios: [ShallowStudio]
+    startDate: DateTimeWithPrecision
+    endDate: DateTimeWithPrecision
+
+    releaseStatus: releaseStatusType
     nextEpisode: ShallowEpisode
+    releaseSchedules: AnimeReleaseScheduleConnection
+
     anidbUrl: String
+    anilistUrl: String
     animePlanetUrl: String
     anisearchUrl: String
+    annUrl: String
+    kitsuUrl: String
     malUrl: String
+
+    sourceMaterial: SourceMaterial
+    sourceMaterialId: String
+    editorNote: MarkdownText
+    hasStreams: Boolean
+    hasVideos: Boolean
+    createdAt: ISO8601DateTime
+    updatedAt: ISO8601DateTime
+
+    viewerLibraryEntry: ViewerLibraryEntry # Authed
 }
 
 type OnTheFlyImage {
     url: String
+    styles: [Style]
+    urlTemplate: String
+    cacheNamespace: String
+}
+type Style {
+    name: String
+    height: Int
+    width: Int
+    formats: [StyleFormats] #TODO
 }
 
 type AnimeSynopsis {
+    markdown: String
+    source: String
+    sourceUrl: String
+    emended: Boolean
+}
+
+type MarkdownText {
     markdown: String
 }
 
@@ -58,16 +104,27 @@ type ShallowTag {
     id: ID
     name: String
     hidden: String
+    created_at: String
+    updated_at: String
+}
+
+type ShallowStudio {
+    id: ID!
+    name: String
+    websiteUrl: String
+    websiteLabel: String
+    facebookUrl: String
+    youtubeUrl: String
+    createdAt: ISO8601DateTime
+    updatedAt: ISO8601DateTime
+    foundedDate: DateWithPrecision
+    defunctDate: DateWithPrecision
+    logo: OnTheFlyImage
 }
 
 type AggregateRating {
     count: Int
     weightedValue: Float
-}
-
-type DateTimeWithPrecision {
-	value: ISO8601DateTime
-	precision: DateTimePrecision
 }
 
 type ShallowEpisode {
@@ -77,6 +134,115 @@ type ShallowEpisode {
     airdate: ISO8601DateTime
 }
 
+#TODO: find key for schedules nextEp/countdown (https://www.livechart.me/pages/about-release-schedules)
+type AnimeReleaseScheduleConnection {
+    nodes: [AnimeReleaseSchedule]
+}
+type AnimeReleaseSchedule {
+    id: String
+    title: String
+    tracks: [ReleaseScheduleTrack]
+    action: WebLink
+    startDate: DateTimeWithPrecision
+    endDate: DateTimeWithPrecision
+
+    viewerNotificationsPreference: Boolean! # Authed (default: false)
+    pinnedByViewer: Boolean # Authed
+}
+type ReleaseScheduleTrack {
+    id: String # json string "[{scheduleId}, {langId}, {type}]"
+    type: MediaTrackType
+    language: Language
+}
+type Language {
+    id: String
+    code: String
+}
+enum MediaTrackType {
+    SUBTITLES
+    AUDIO
+}
+
+type WebLink {
+    url: String #err 500 when discovering
+}
+
+type SourceMaterial {
+    id: String
+    name: String
+    createdAt: ISO8601DateTime
+    updatedAt: ISO8601DateTime
+}
+
+type AnimeVideoConnection {
+    nodes: [AnimeVideo]
+}
+type AnimeVideo {
+    title: String
+}
+
+# type ScheduleListings{ #TODO
+
+# }
+
+#
+# --- Franchise ---
+type Franchise {
+    favoriteCount: Int!
+    viewerHasFavorited: Boolean # Authed
+    aggregateRating: AggregateRating
+    headlines: HeadlineConnection
+    installments: FranchiseInstallmentConnection
+}
+type FranchiseInstallmentConnection {
+    nodes: FranchiseInstallment
+}
+type FranchiseInstallment {
+    anime: Anime
+}
+
+#
+# --- Headlines ---
+type HeadlineConnection {
+    nodes: Headline
+}
+# type Headline { #TODO
+#
+# }
+
+#
+# --- User Info ---
+type Viewer {
+    id: ID!
+    username: String!
+    updatedAt: ISO8601DateTime!
+    createdAt: ISO8601DateTime!
+    email: String
+    unconfirmedEmail: String
+    library: ViewerLibraryEntryConnection
+    notificationMetadata: UserNotificationMetadata
+}
+type UserNotificationMetadata {
+    unreadCount: Int
+}
+type NotificationCategory {
+    databaseId: String
+    viewerUnreadCount: Int
+}
+type ViewerLibraryEntryConnection {
+    nodes: [ViewerLibraryEntry]
+}
+type ViewerLibraryEntry {
+    id: String!
+    animeId: String
+    status: LibraryEntryStatus!
+    episodesWatched: Int!
+    rewatches: Int!
+    rating: RatingScale
+    startedAt: ISO8601Date
+    finishedAt: ISO8601Date
+    notes: String
+}
 type LibraryEntryAttributes {
     status: LibraryEntryStatus
     rating: Float
@@ -85,6 +251,49 @@ type LibraryEntryAttributes {
     finishedAt: ISO8601DateTime
     rewatches: Int
     notes: String
+}
+
+type PublicUser {
+    username: String!
+    id: ID!
+    createdAt: ISO8601DateTime!
+    library(
+        statuses: [LibraryEntryStatus]
+        sort: LibraryEntrySort
+    ): PublicLibraryEntryConnection
+}
+type PublicLibraryEntryConnection {
+    nodes: [PublicLibraryEntry]
+}
+type PublicLibraryEntry {
+    animeId: Int
+    status: LibraryEntryStatus
+    rating: Float
+    episodesWatched: Int
+    anime: Anime
+}
+
+#
+type DateTimeWithPrecision {
+    value: ISO8601DateTime
+    precision: DateTimePrecision
+}
+type DateWithPrecision {
+    value: ISO8601Date
+    precision: DatePrecision
+}
+
+#
+# --- Enums +Misc ---
+union ID = String | Int
+
+# enum LibraryEntrySort { #TODO
+#   no idea what these are, ive tried so many
+# }
+enum releaseStatusType {
+    NOT_YET_RELEASED
+    RELEASING
+    FINISHED
 }
 
 enum LibraryEntryStatus {
@@ -103,6 +312,10 @@ enum RatingScale {
     RATING_10
 }
 
+enum DatePrecision {
+    FULL
+}
+
 enum DateTimePrecision {
     DATE_AND_TIME
     DATE
@@ -115,10 +328,6 @@ enum TitleLanguage {
     ROMAJI
     NATIVE
     ENGLISH
-}
-
-type Viewer {
-    username: String!
 }
 
 scalar ISO8601Date
